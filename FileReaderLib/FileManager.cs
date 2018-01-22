@@ -17,11 +17,10 @@ namespace FileReaderLib
         /// </summary>
         public static void ReadFiles()
         {
-            foreach (string file in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.txt"))
+            foreach (string file in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".txt") || s.EndsWith(".xml")))
             {
                 string contents = File.ReadAllText(file);
-
-                Console.Write("File Content: " + contents + "\n");
+                //Console.Write("File Content: " + contents + "\n");
             }
         }
 
@@ -30,10 +29,11 @@ namespace FileReaderLib
         /// </summary>
         public static void ReadFiles(string filePath)
         {
-            string contents = File.ReadAllText(filePath);
-
-            Console.Write("File Content: " + contents + "\n");
-            
+            if (filePath.EndsWith(".xml") || filePath.EndsWith(".txt"))
+            {
+                string contents = File.ReadAllText(filePath);
+                //Console.Write("File Content: " + contents + "\n");
+            }
         }
     }
 }
